@@ -2,15 +2,25 @@ name: Deploy Worker
 on:
   push:
     branches:
-      - main
+      - cfw-gha-fix
 jobs:
   deploy:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: '10'
+
+      - name: Install Wrangler latest v4
+        run: pnpm add -D wrangler@latest
+
       - name: Build & Deploy Worker
         uses: cloudflare/wrangler-action@v3
+
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
