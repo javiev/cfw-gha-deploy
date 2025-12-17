@@ -10,6 +10,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: '10'
+
       - name: Install Wrangler latest v4
         run: pnpm add -D wrangler@latest
 
