@@ -10,6 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install Wrangler latest v4
+        run: pnpm add -D wrangler@latest
+
       - name: Build & Deploy Worker
         uses: cloudflare/wrangler-action@v3
 
